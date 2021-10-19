@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text Txt_Score = null;
     [SerializeField] private Text Txt_Message = null;
     private int Score = 0;
+    public AudioClip audioClip;
+    public AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         thisManager = this;
         Time.timeScale = 0;
     }
@@ -19,7 +22,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Time.timeScale == 0 && Input.GetKeyDown(KeyCode.Return))
+        {
             StartGame();
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
     }
 
     public void UpdateScore(int value)
